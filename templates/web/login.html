@@ -1,0 +1,32 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+
+{% block container %}
+
+    <section class="py-24">
+        <div class="w-[90%] h-[450px] lg:w-[70%] lg:h-[100%] lg:flex lg:justify-start lg:items-start rounded-xl shadow-lg ml-5 lg:ml-52">
+            <div class="w-[50%] mr-7 hidden lg:block">
+                <img src="{% static 'web/images/rest1.png' %}" alt="" class="w-full rounded-s-xl">
+            </div>
+            <div class="lg:w-[50%] text-center">
+                <h1 class="mt-4 text-[32px] font-semibold mb-5">LOGIN NOW</h1>
+                <p class="w-[90%] lg:w-[70%] m-auto mb-7">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate, velit officia consequuntur labore harum praesentium!</p>
+                <form action="" method="post" class="w-[90%] lg:w-[70%] m-auto">
+                    {% csrf_token %}
+                    <input type=" text" name="email" placeholder="Enter your email." class="w-full outline-none border rounded-xl py-3 px-5 mb-6">
+                    <input type=" text" name="password" placeholder="Enter your password." class="w-full outline-none border rounded-xl py-3 px-5 mb-6">
+
+                    <div class="flex justify-center mb-7">
+                         <button type="submit" class="py-3 px-6 bg-red-500 text-[14px] font-semibold text-white rounded-xl">LOGIN</button>
+                    </div>
+                </form>
+                {% if error %}
+                <p class="text-[14px] text-red-500 mb-6">{{message}}</p>
+                {% endif %}
+                <p class="text-[14px]">Don't have an Account? <a href="{% url 'web:register' %}" class="text-red-500">Sign Up</a></p>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

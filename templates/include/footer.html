@@ -1,0 +1,14 @@
+{% load static %}
+
+<footer class="lg:hidden py-6 fixed bottom-0 z-50 bg-white w-full shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+    <section class="wrapper ">
+        <div class="">
+                <ul class="flex justify-center items-center">
+                    <li class="mr-7"><a href="{% url 'web:index' %}" class="flex justify-start items-center text-[#515151] text-[13px] md:text-[16px]"><img src="{% static 'web/images/home.png' %}" alt="" class="w-[13px] md:w-[16px] mr-2">Home</a></li>
+                    <li class="mr-7"><a href="#" class="flex justify-start items-center text-[#515151] text-[13px] md:text-[16px]"><img src="{% static 'web/images/search.png' %}" alt="" class="w-[13px] md:w-[16px] mr-2">Search</a></li>
+                    <li class="mr-7"><a href="{% url 'web:cart' %}" class="flex justify-start items-center text-[#515151] text-[13px] md:text-[16px]"><img src="{% static 'web/images/bag.png' %}" alt="" class="w-[13px] md:w-[16px] mr-2">Cart</a></li>
+                    <li><a href="{% url 'web:account' %}" class="flex justify-start items-center text-[#515151] text-[13px] md:text-[16px]"><img src="{% static 'web/images/user.png' %}" alt="" class="w-[13px] md:w-[16px] mr-2">Account</a></li>
+                </ul>
+            </div>
+    </section>
+</footer>

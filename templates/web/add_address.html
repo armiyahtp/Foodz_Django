@@ -1,0 +1,76 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+
+{% block container %}
+
+
+    <header class="h-[80px] shadow-md">
+        <section class="wrapper h-full flex justify-start items-center">
+            <div class="w-[30%] md:w-[38%] lg:w-[42%]">
+                <a href="{% url 'web:address' %}">
+                    <img src="{% static 'web/images/arrow.png' %}" alt="" class="w-[16px] md:w-[25px]">
+                </a>
+            </div>
+            <div class="w-[70%] md:w-[62%] lg:w-[58%]">
+                <h1 class="text-[26px] md:text-[34px] font-bold text-[#515151]">Address</h1>
+            </div>
+        </section>
+    </header>
+
+
+
+    <section class="py-10">
+        <section class="wrapper md:px-[10%] lg:px-[26%]">
+
+            <div class="bg-[#d1d5da] h-[140px] md:h-[175px] rounded-lg mb-3"></div>
+
+            <form action="" method="post">
+                {% csrf_token %}
+                <div>
+                    <label for="" class="font-semibold text-[#515151] text-[16px]">Address</label>
+                    <input type="text" value="{{address.address}}" name="address" id="" class="w-full outline-none border-2 rounded-lg py-1 md:py-2 px-5 mt-1 mb-3">
+                </div>
+
+                <div>
+                    <label for="" class="font-semibold text-[#515151] text-[16px]">Appartment/Bulding No.</label>
+                    <input type="text" value="{{address.appartment}}" name="appartment" id="" class="w-full outline-none border-2 rounded-lg py-1 md:py-2 px-5 mt-1 mb-3">
+                </div>
+
+                <div>
+                    <label for="" class="font-semibold text-[#515151] text-[16px]">Landmark</label>
+                    <input type="text" value="{{address.landmark}}" name="landmark" id="" class="w-full outline-none border-2 rounded-lg py-1 md:py-2 px-5 mt-1 mb-3">
+                </div>
+
+                <div class="">
+                    <label for="" class="font-semibold text-[#515151] text-[16px]">Label as</label>
+                    <div class="flex justify-between items-center mt-2 mb-4">
+                        <div id="home" class="w-[100px] md:w-40 lg:w-44 h-10 border-2 rounded-lg flex justify-start items-center">
+                            <label for="" class="ml-4 text-[12px] md:text-[16px] font-semibold">HOME</label>
+                            <input type="radio" id="btn1" value="Home" name="address_type" class="appearance-none w-[100px] md:w-40 lg:w-44 h-9 text-black rounded-lg checked:bg-[#F44336] cursor-pointer">
+                        </div>
+
+                        <div id="work" class="w-[100px] md:w-40 lg:w-44 h-10 border-2 rounded-lg flex justify-start items-center">
+                            <label for="" class="ml-4 text-[12px] md:text-[16px] font-semibold">WORK</label>
+                            <input type="radio" id="btn2" value="Work" name="address_type" class="appearance-none w-[100px] md:w-40 lg:w-44 h-9 text-black rounded-lg checked:bg-[#F44336] cursor-pointer">
+                        </div>
+
+                        <div id="other" class="w-[100px] md:w-40 lg:w-44 h-10 border-2 rounded-lg flex justify-start items-center">
+                            <label for="" class="ml-4 text-[12px] md:text-[16px] font-semibold">OTHER</label>
+                            <input type="radio" id="btn3" value="Other" name="address_type" class="appearance-none w-[100px] md:w-40 lg:w-44 h-9 text-black rounded-lg checked:bg-[#F44336] cursor-pointer">
+                        </div>                       
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" class="bg-[#F44336] hover:bg-red-400 text-white text-[16px] font-semibold w-full py-2 rounded-lg">SAVE ADDRESS</button>
+                </div>
+
+
+            </form>
+        </section>
+    </section>
+
+
+
+{% endblock %}    

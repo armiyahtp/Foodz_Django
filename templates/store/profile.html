@@ -1,0 +1,86 @@
+{% extends "base/manager-base.html" %} {% load static %} {% block container %} 
+
+    {% include 'include/store-header.html' %}
+
+    <div class="content-body">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="media align-items-center mb-5">
+                                <img class="mr-3" src="{% static 'images/user/form-user.png' %}" width="80" height="80" alt="">
+                                <div class="media-body">
+                                    <h3 class="mb-0">{{store_details.user.first_name}} {{store_details.user.last_name}}</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <ul class="card-profile__info col-12 col-md-6">
+                                    <li><strong class="text-dark mr-4">Email :</strong> <span>{{store_details.user.email}}</span></li>
+                                </ul>
+
+                                <ul class="text-center col-12 col-md-6">
+                                    <li><a href="{% url 'restaurant:logout' %}"><button class="btn btn-danger px-5">LOGOUT</button></a></li>
+                                </ul>
+                            </div>
+                            
+                        </div>
+                    </div>  
+                </div>
+                {% if store_details.store %}
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media align-items-center mb-4">
+                                    <img class="mr-3" src="{{store_details.store.image.url}}" width="80" height="80" alt="" style="border-radius: 20px;">
+                                    <div class="media-body">
+                                        <h3 class="mb-0">{{store_details.store.name}}</h3>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-5">
+                                    <div class="col">
+                                        <div class="card card-profile text-center">
+                                            <span class="mb-1 text-primary"><i class="fa-solid fa-store"></i></span>
+                                            <h3 class="mb-0">{{fooditems}}</h3>
+                                            <p class="text-muted px-4">Food Items</p>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="card card-profile text-center">
+                                            <span class="mb-1 text-warning"><i class="fa-solid fa-chart-column"></i></span>
+                                            <h3 class="mb-0">{{orders}}</h3>
+                                            <p class="text-muted">Orders</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h4>About</h4>
+                                <p class="text-muted">{{store_details.store.tagline}}</p>
+                                <ul class="card-profile__info">
+                                    <li class="mb-1"><strong class="text-dark mr-4"><img src="{% static 'web/images/star.png' %}" alt="image" style="width: 16px; margin-right: 0.2rem;"></strong> <span>{{store_details.store.rating}}</span></li>
+                                    <li><strong class="text-dark mr-4"><img src="{% static 'web/images/clock.png' %}" alt="image" style="width: 16px; margin-right: 0.2rem;"></strong> <span>{{store_details.store.time}} min</span></li>
+                                </ul>
+                                
+                                <div class="row mb-5 mt-5">
+                                    <div class="col text-center">
+                                        <a href="{% url 'restaurant:edit_store' id=store_details.id %}"><button class="btn btn-primary px-5">EDITE</button></a>
+                                    </div>
+                                    <div class="col text-center">
+                                        <a href="{% url 'restaurant:delete_store' id=store_details.id %}"><button class="btn btn-danger px-5">DELETE</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                {% else %}
+                    <div class="row mb-5 mt-5">
+                        <div class="col text-center">
+                            <a href="{% url 'restaurant:add_store' %}"><button class="btn btn-primary px-5">ADD STORES</button></a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

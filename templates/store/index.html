@@ -1,0 +1,116 @@
+{% extends "base/manager-base.html" %} {% load static %} {% block container %}
+
+
+{% include 'include/store-header.html' %}
+
+
+
+        <div class="content-body">
+
+            <div id="overview-container" class="card">
+                <h1 class="card-title">Overview</h1>
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card-body dash-item">
+                            <div class="icon-bg">
+                                <i class="fa-solid fa-chart-column"></i>
+                            </div>
+                            <div>
+                                <p>Orders</p>
+                                <h3>{{orders}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card-body dash-item">
+                            <div class="icon-bg">
+                                <i class="fa-solid fa-user-group"></i>
+                            </div>
+                            <div>
+                                <p>Customers</p>
+                                <h3>{{customers}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card-body dash-item">
+                            <div class="icon-bg">
+                                <i class="fa-solid fa-store"></i>
+                            </div>
+                            <div>
+                                <p>Food Items</p>
+                                <h3>{{fooditems}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card-body dash-item">
+                            <div class="icon-bg">
+                                <i class="fa-solid fa-coins"></i>
+                            </div>
+                            <div>
+                                <p>Earnings</p>                            
+                                <h3>{{earnings}}</h3>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            {% if instance %}
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Basic Table</h4>
+                                    <div class="table-responsive">
+                                        <table class="table header-border">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">IMAGE</th>
+                                                    <th scope="col">NAME</th>
+                                                    <th scope="col">TAGLINE</th>
+                                                    <th scope="col">CATEGORY</th>
+                                                    <th scope="col">RATING</th>
+                                                    <th scope="col">TIME</th>
+                                                    <th scope="col">OFFER</th>
+                                                    <th scope="col">EDIT</th>
+                                                    <th scope="col">DELETE</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <img src="{{instance.image.url}}" alt="image" class="logo-image">
+                                                    </td>
+                                                    <td>{{instance.name}}</td>
+                                                    <td>{{instance.tagline}}</td>
+                                                    <td>{{instance.category}}</td>
+                                                    <td>{{instance.rating}}</td>
+                                                    <td>{{instance.time}}</td>
+                                                    <td>{{instance.offer}}</td>
+                                                    <td>
+                                                        <a href="{% url 'restaurant:edit_store' id=instance.id %}" id="custom-btn">EDIT</a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="{% url 'restaurant:delete_store' id=instance.id %}" id="custom-btn">DELETE</a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            <!-- #/ container -->
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+        {% endblock %}

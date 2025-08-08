@@ -1,0 +1,75 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+
+{% block container %}
+
+
+    <header class="h-[80px] shadow-md">
+        <section class="wrapper h-full flex justify-start items-center">
+            <div class="w-[30%] md:w-[38%] lg:w-[42%]">
+                <a href="{% url 'web:account' %}">
+                    <img src="{% static 'web/images/arrow.png' %}" alt="" class="w-[16px] md:w-[25px]">
+                </a>
+            </div>
+            <div class="w-[70%] md:w-[62%] lg:w-[58%]">
+                <h1 class="text-[26px] md:text-[34px] font-bold text-[#515151]">Orders</h1>
+            </div>
+        </section>
+    </header>
+
+
+
+    <section class="py-10">
+        <section class="wrapper">
+        
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {% for item in order_item_count %}
+                    <div class="rounded-lg border p-6 shadow-md mb-6">
+                        <div class="flex justify-between items-start border-b-2 pb-2 mb-3">
+                            <div class="flex justify-start items-start">
+                                <img src="{{item.order.store.image.url}}" alt="" class="w-[18%] rounded-lg mr-3">
+                                <div class="w-[70%]">
+                                    <h3 class="text-[#515151] text-[15px] font-semibold mb-2">{{item.order.store.name}}</h3>
+                                    <p class="text-[#515151] text-[14px] font-semibold">₹ {{item.order.total}} | {{item.count}} items</p>
+                                </div>
+                            </div>
+                            <span class="text-[#515151] text-[14px] font-semibold underline">
+                                #{{item.order.order_id}}
+                            </span>
+                        </div>
+                        
+                        <div class="flex justify-between items-center">
+                            <a href="{% url 'web:order_tracking' item.order.id %}"><button class=" py-2 px-4 bg-[#2AC489] rounded-md hover:bg-[#67c09e] text-[12px] md:text-[15px] text-white font-semibold">TRACK ORDER</button></a>
+                            <p class="px-3 py-1 rounded-full text-[15px] font-semibold {% if item.order.status == 'CO' %}bg-green-200 text-green-800{% elif item.order.status == 'SH' or item.order.status == 'DI' %}bg-blue-200 text-blue-800{% else %}bg-yellow-100 text-yellow-700{% endif %}">
+                                {% if item.order.status == 'PL' %}
+                                    Prepairing
+                                {% elif item.order.status == 'AC' %}
+                                    Prepared
+                                {% elif item.order.status == 'SH' %}
+                                    Shiped
+                                {% elif item.order.status == 'DI' %}
+                                    On The Way
+                                {% elif item.order.status == 'CA' %}
+                                    Cancelled
+                                {% else %}
+                                    Delivered
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>                      
+                {% endfor %}
+            </div>
+        </section>
+    </section>    
+
+
+
+
+
+
+
+
+
+
+{% endblock %}    

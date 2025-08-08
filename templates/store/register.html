@@ -1,0 +1,55 @@
+{% extends "base/manager-base.html" %} {% block container %} {% load static %}
+
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+            </svg>
+        </div>
+    </div>
+
+    
+
+
+
+    <div class="login-form-bg h-100" style="margin-top: 100px;">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100">
+                <div class="col-xl-6">
+                    <div class="form-input-content">
+                        <div class="card login-form mb-0">
+                            <div class="card-body pt-5">
+                                <h4 class="text-center">Store Register</h4>
+                                <form class="mt-5 mb-5 login-input" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-row">
+                                        <div class="form-group col-12 col-md-6">
+                                            <input type="text" class="form-control" name="first_name" placeholder="First Name" required style="padding: 0 10px;">
+                                        </div>
+                                        <div class="form-group col-12 col-md-6">
+                                            <input type="text" class="form-control" name="last_name" placeholder="Last Name" required style="padding: 0 10px;">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" name="email" placeholder="Email" required style="padding: 0 10px;">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" name="password" placeholder="Password" required style="padding: 0 10px;">
+                                    </div>
+                                    <button class="btn login-form__btn submit w-100" type="submit">Sign Up</button>
+                                </form>
+                                    <p class="mt-5 login-form__footer">Have account <a href="{% url 'restaurant:login' %}" class="text-primary">Sign in </a> now</p>
+                                    {% if message %}
+                                        <p class="alert alert-danger">{{ message }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

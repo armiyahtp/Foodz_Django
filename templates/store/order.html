@@ -1,0 +1,88 @@
+{% extends "base/manager-base.html" %} {% block container %} {% load static %}
+
+
+{% include 'include/store-header.html' %}
+
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+
+            <div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Orders</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Order</a></li>
+                    </ol>
+                </div>
+            </div>
+            <!-- row -->
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Order</h4>
+                                <div class="table-responsive">
+                                    <table class="table header-border">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">STORE IMAGE</th>
+                                                <th scope="col">STORE NAME</th>
+                                                <th scope="col">CUSTOMER</th>
+                                                <th scope="col">ORDER ID</th>
+                                                <th scope="col">ADDRESS</th>
+                                                <th scope="col">STATUS</th>
+                                                <th scope="col">ITEM TOTAL</th>
+                                                <th scope="col">TOTAL</th>
+                                                <th scope="col">DELIVERY CHARGE</th>
+                                                <th scope="col">DELETE</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <img src="{{instance.store.image.url}}" alt="image" class="logo-image">
+                                                </td>
+                                                <td>{{instance.store.name}}</td>
+                                                <td>{{instance.customer}}</td>
+                                                <td>{{instance.order_id}}</td>
+                                                <td>{{instance.address.address}}</td>
+                                                {% if instance.status == 'PL' %}
+                                                    <td class="badge gradient-3" style="margin-top: 2rem;">PLACED</td>
+                                                {% elif instance.status == 'AC' %}
+                                                    <td class="badge gradient-9" style="margin-top: 2rem;">ACCEPTED</td>
+                                                {% elif instance.status == 'SH' %}
+                                                    <td class="badge gradient-1" style="margin-top: 2rem;">SHIPPED</td>
+                                                {% elif instance.status == 'DI' %}
+                                                    <td class="badge gradient-4" style="margin-top: 2rem;">ON THE WAY</td>
+                                                {% elif instance.status == 'CO' %}
+                                                    <td class="badge gradient-7" style="margin-top: 2rem;">COMPLETED</td>
+                                                {% else %}
+                                                    <td class="gradient-2 badge" style="margin-top: 2rem;">CANCELLED</td>
+                                                {% endif %}
+                                                <td>{{instance.sub_total}}</td>
+                                                <td>{{instance.total}}</td>
+                                                <td>{{instance.delivery_charge}}</td>
+                                                <td>
+                                                    <a href="{% url 'restaurant:order_delete' id=instance.id %}" id="custom-btn">DELETE</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+{% endblock %}

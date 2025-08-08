@@ -1,0 +1,70 @@
+{% extends "base/manager-base.html" %} {% block container %} {% load static %}
+
+
+{% include 'include/manager-header.html' %}
+
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+
+            <div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Address</a></li>
+                    </ol>
+                </div>
+            </div>
+            <!-- row -->
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Address</h4>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered zero-configuration" style="border-radius: 14px;">
+                                        <thead>
+                                            <tr>
+                                                <th>Customer</th>
+                                                <th>ADDRESS</th>
+                                                <th>ADDRESS TYPE</th>
+                                                <th>LANDMARK</th>
+                                                <th>APPARTMENT/BULDING NO</th>
+                                                <th>DELETE</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for instance in instances %}
+                                            <tr>
+                                                <td>{{instance.customer}}</td>
+                                                <td>{{instance.address}}</td>
+                                                <td>{{instance.address_type}}</td>
+                                                <td>{{instance.landmark}}</td>
+                                                <td>{{instance.appartment}}</td>
+                                                <td>
+                                                    <a href="{% url 'manager:address_delete' id=instance.id %}" id="custom-btn">DELETE</a>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+{% endblock %}

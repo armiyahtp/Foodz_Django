@@ -1,0 +1,34 @@
+{% extends "base/manager-base.html" %} {% block container %} {% load static %}
+
+    {% include 'include/manager-header.html' %}
+
+    <div class="content-body">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-xl-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="media align-items-center mb-5">
+                                <img class="mr-3" src="{% static 'images/user/form-user.png' %}" width="80" height="80" alt="">
+                                <div class="media-body">
+                                    <h3 class="mb-0">{{manager.user.first_name}} {{manager.user.last_name}}</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <ul class="card-profile__info col-12 col-md-6">
+                                    <li><strong class="text-dark mr-4">Email :</strong> <span>{{manager.user.email}}</span></li>
+                                </ul>
+
+                                <ul class="text-center col-12 col-md-6">
+                                    <li><a href="{% url 'manager:logout' %}"><button class="btn btn-danger px-5">LOGOUT</button></a></li>
+                                </ul>
+                            </div>
+                            
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+
+{% block container %}
+
+
+    <header class="h-[80px] shadow-md">
+        <section class="wrapper h-full flex justify-start items-center">
+            <div class="w-[30%] md:w-[38%] lg:w-[42%]">
+                <a href="{% url 'web:index' %}">
+                    <img src="{% static 'web/images/arrow.png' %}" alt="" class="w-[16px] md:w-[25px]">
+                </a>
+            </div>
+            <div class="w-[70%] md:w-[62%] lg:w-[58%]">
+                <h1 class="text-[26px] md:text-[34px] font-bold text-[#515151]">Account</h1>
+            </div>
+        </section>
+    </header>
+
+
+
+    <section class="py-10">
+        <section class="wrapper">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-7">
+                <div class="col-span-1">
+                    <div class="flex justify-start items-center rounded-lg border p-6 mb-6">
+                        <div class="mb-3 w-[30%] mr-3">
+                            <img src="{% static 'web/images/man.png' %}" alt="" class="rounded-lg ">
+                        </div>
+
+                        <div class="">
+                            <p class="text-[#515151] text-[15px] font-semibold mb-2">{{customer.user.first_name}} {{customer.user.last_name}}</p>
+                            <p class="text-[#515151] text-[15px] font-semibold">{{customer.user.email}}</p>
+                        </div>
+                    </div>
+
+                    <div class="px-12">
+                        <a href="{% url 'web:address' %}" class="bg-[#2AC489] flex justify-start items-center py-2 px-6 border-2 hover:bg-[#67c09e] rounded-lg mb-5 ">
+                            <img src="{% static 'web/images/address.png' %}" alt="" class="w-[22px] mr-4">
+                            <p class="text-[16px] text-white font-semibold">Manage Address</p>
+                        </a>
+
+                        <a href="{% url 'web:cart' %}" class="bg-[#2AC489] flex justify-start items-center py-2 px-6 border-2 hover:bg-[#67c09e] rounded-lg mb-5 ">
+                            <img src="{% static 'web/images/cart2.png' %}" alt="" class=" invert mr-4">
+                            <p class="text-[16px] text-white font-semibold">Cart</p>
+                        </a>
+
+                        <a href="{% url 'web:orders' %}" class="bg-[#2AC489] flex justify-start items-center py-2 px-6 border-2 hover:bg-[#67c09e] rounded-lg mb-5 ">
+                            <img src="{% static 'web/images/cart.png' %}" alt="" class="w-[22px] mr-4">
+                            <p class="text-[16px] text-white font-semibold">Orders</p>
+                        </a>
+
+                        <a href="{% url 'web:logout' %}" class="bg-[#2AC489] flex justify-start items-center py-2 px-6 border-2 hover:bg-[#67c09e] rounded-lg mb-5 ">
+                            <img src="{% static 'web/images/logout.png' %}" alt="" class="w-[22px] mr-4">
+                            <p class="text-[16px] text-white font-semibold">Logout</p>
+                        </a>
+                    </div>
+                                       
+                </div>
+
+                <div class="col-span-2">
+                    <h2 class="mb-5 text-[#515151] text-[16px] md:text-[22px] font-bold">Recent Orders</h2>
+                    <div class="md:grid md:grid-cols-2 gap-6">
+                        {% for item in order_item_count %}
+                            <div class="rounded-lg border p-6 shadow-md mb-6">
+                                <div class="flex justify-between items-start border-b-2 pb-2 mb-3">
+                                    <div class="flex justify-start items-start">
+                                        <img src="{{item.order.store.image.url}}" alt="" class="w-[18%] rounded-lg mr-3">
+
+                                        <div class="w-[70%]">
+                                            <h3 class="text-[#515151] text-[15px] font-semibold mb-2">{{item.order.store.name}}</h3>
+                                            <p class="text-[#515151] text-[14px] font-semibold">₹ {{item.order.total}} | {{item.count}} items</p>
+                                        </div>
+                                    </div>
+
+                                    <span class="text-[#515151] text-[14px] font-semibold underline">
+                                        #{{item.order.order_id}}
+                                    </span>
+                                </div>
+
+                                <div class="flex justify-between items-center">
+                                    <a href="{% url 'web:order_tracking' item.order.id %}"><button class=" py-2 px-4 bg-[#2AC489] rounded-md hover:bg-[#67c09e] text-[12px] md:text-[15px] text-white font-semibold">TRACK ORDER</button></a>
+                                    <p class="px-3 py-1 rounded-full text-[15px] font-semibold {% if item.order.status == 'CO' %}bg-green-200 text-green-800{% elif item.order.status == 'SH' or item.order.status == 'DI' %}bg-blue-200 text-blue-800{% else %}bg-yellow-100 text-yellow-700{% endif %}">
+                                        {% if item.order.status == 'PL' %}
+                                            Prepairing
+                                        {% elif item.order.status == 'AC' %}
+                                            Prepared
+                                        {% elif item.order.status == 'SH' %}
+                                            Shiped
+                                        {% elif item.order.status == 'DI' %}
+                                            On The Way
+                                        {% elif item.order.status == 'CA' %}
+                                            Cancelled
+                                        {% else %}
+                                            Delivered
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>                      
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>    
+
+
+
+
+
+
+
+
+
+
+{% endblock %}    

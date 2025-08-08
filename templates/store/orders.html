@@ -1,0 +1,98 @@
+{% extends "base/manager-base.html" %} {% block container %} {% load static %}
+
+
+{% include 'include/store-header.html' %}
+
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+
+            <div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Orders</a></li>
+                    </ol>
+                </div>
+            </div>
+            <!-- row -->
+
+            {% if instances %}
+                <div class="container-fluid mt-3">
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h1 class="card-title" style="padding-bottom: 16px;">Orders</h1>
+                                    <div class="active-member">
+                                        <div class="table-responsive">
+                                            <table class="table table-xs mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Customer</th>
+                                                        <th>Store</th>
+                                                        <th>Price</th>
+                                                        <th>View</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for instance in instances %}
+                                                    <tr>
+                                                        <td>{{instance.customer.user.first_name}} {{instance.customer.user.last_name}}</td>
+                                                        <td>{{instance.store.name}}</td>
+                                                        <td>{{instance.total}}</td>
+                                                        <td>
+                                                            <a href="{% url 'restaurant:order' id=instance.id %}" id="custom-btn">VIEW</a>
+                                                        </td>
+                                                        <td class="text-white">
+                                                            {% if instance.status == 'PL' %}
+                                                                <a href="{% url 'manager:order_accept' id=instance.id %}" id="custom-green">ACCEPT</a>
+                                                                <br> <br>
+                                                                <a href="{% url 'manager:order_reject' id=instance.id %}" id="custom-red">REJECT</a>
+                                                            {% elif instance.status == 'AC' %}
+                                                                <a href="{% url 'manager:order_prepared' id=instance.id %}" id="custom-green">SHIPED</a>
+                                                                <br> <br>
+                                                                <a href="{% url 'manager:order_reject' id=instance.id %}" id="custom-red">CANCELL</a>
+                                                            {% elif instance.status == 'SH' %}
+                                                                <a href="{% url 'manager:order_picked' id=instance.id %}" id="custom-green">ON THE WAY</a>
+                                                                <br> <br>
+                                                                <a href="{% url 'manager:order_reject' id=instance.id %}" id="custom-red">CANCELL</a>
+                                                            {% elif instance.status == 'DI' %}
+                                                                <a href="{% url 'manager:order_completed' id=instance.id %}" id="custom-green">COMPLETE</a>
+                                                                <br> <br>
+                                                                <a href="{% url 'manager:order_reject' id=instance.id %}" id="custom-red">CANCELL</a>
+                                                            {% elif instance.status == 'CA' %}
+                                                                <a href="#" id="custom-red">CANCELLED</a>
+                                                            {% else %}
+                                                                <a style="font-size: 12px;" class="btn-rounded py-2 px-3  mb-1 btn-primary color-white">
+                                                                    COMPLETED
+                                                                </a>
+                                                            {% endif %}
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                        
+                        </div>
+                    </div>
+
+
+                </div>
+            {% endif %}
+            <!-- #/ container -->
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+{% endblock %}

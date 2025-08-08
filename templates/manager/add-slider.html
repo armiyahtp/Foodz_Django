@@ -1,0 +1,67 @@
+{% extends "base/manager-base.html" %} {% block container %} {% load static %}
+
+
+{% include 'include/manager-header.html' %}
+
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+
+            <div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Sliders</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Add Slider</a></li>
+                    </ol>
+                </div>
+            </div>
+            <!-- row -->
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Add Slider</h4>
+                                <div class="basic-form">
+                                    <form action="" method="post" class="ajax redirect" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="form-row">
+                                            <div class="form-group col-12 col-md-6">
+                                                <label>Store Name</label>
+                                                {{form.name}}
+                                            </div>
+                                            <div class="form-group col-12 col-md-6">
+                                                <label>Select Image</label>
+                                                {{form.image}}
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-12">
+                                                <label>Restaurent</label>
+                                                {{form.store}}
+                                            </div>
+                                        </div>
+                                        
+                                        <button style="margin-left: 5px;" class=" btn login-form__btn submit button" type="submit">Submit</button>
+                                        
+                                        
+                                        {% if error %}
+                                            <p>{{message}}</p>
+                                        {% endif %}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+{% endblock %}

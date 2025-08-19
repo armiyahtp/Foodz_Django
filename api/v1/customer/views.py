@@ -243,7 +243,7 @@ def address_delete(request,id):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def slider(request):
     instances = Slider.objects.all()
 
@@ -263,7 +263,7 @@ def slider(request):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def store(request):
 
     instances = Store.objects.all()
@@ -285,7 +285,7 @@ def store(request):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def store_category(request):
     instances = StoreCategory.objects.all()
 
